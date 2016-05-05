@@ -68,7 +68,7 @@ This script will copy and render the template configuration file from `resources
 You are now ready to request the domain certificate:
 
 ```
-sudo domains/example.com/renew
+sudo ./domains/example.com/renew
 ```
 
 This script will make sure the `challenges` directory exists and run the `resources/acme-tiny.py` python script from [diafygi/acme-tiny](https://github.com/diafygi/acme-tiny) to validate the domain and request the certificate. The requested certificate will be saved to `domains/example.com/cert.pem` and will be concatenated with the Let's Encrypt intermediate certificate and saved to `domains/example.com/chain.pem`.
@@ -103,7 +103,21 @@ server {
 Alternatively, you can run the below command to automatically install it:
 
 ```
-sudo domains/example.com/install-nginx
+sudo ./domains/example.com/install-nginx
 ```
 
 This script will copy the configuration file from `domains/[example.com]/domain.conf` to `/etc/nginx/sites-available/[example.com].conf`, create symlink to the file in `/etc/nginx/sites-enable/` and reload NGINX.
+
+### Install cronjob to renew the certificate every month
+
+Let's Encrypt certificates expire after 90 days, so you will need to run the `renew` script in time to request a new certificate. To request a new certificate on the first of each month, add the following line to crontab (by replacing `[path]` with the path where you installed this repository):
+
+```
+0 0 1 * * [path]/domains/example.com/renew
+```
+
+Alternatively you can run the command to automatically install it:
+
+```
+sudo ./domains/example.com/install-cron
+```

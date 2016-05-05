@@ -1,0 +1,8 @@
+#!/bin/bash
+current=$(pwd)
+cd "${BASH_SOURCE%/*}"
+line="0 0 1 * * $(pwd)/renew"
+if [[ "$(crontab -l)" != *"$line"* ]]; then
+    (crontab -l ; echo "$line") | crontab -
+fi
+cd $current

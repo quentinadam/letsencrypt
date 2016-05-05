@@ -17,6 +17,9 @@ if [ ! -z $1 ]; then
     if [ ! -f install-nginx ]; then
         cp ../../resources/domains/install-nginx .
     fi
+    if [ ! -f install-nginx ]; then
+        cp ../../resources/domains/install-cron .
+    fi
     if [ ! -f domain.conf ]; then
         sed -e "s|\[domain\]|$1|g" -e "s|\[path\]|$(pwd)|g" ../../resources/domains/domain.conf > domain.conf
     fi
