@@ -121,3 +121,5 @@ Alternatively you can run the command to automatically install it:
 ```
 sudo ./domains/example.com/install-cron
 ```
+
+This will install the renew script in crontab to run every first of the month, if the line does not yet exist in crontab.
