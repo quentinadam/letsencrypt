@@ -1,0 +1,9 @@
+#!/bin/bash
+current=$(pwd)
+path="${BASH_SOURCE%/*}/account"
+mkdir -p $path
+cd $path
+if [ ! -f key.pem ]; then
+    openssl genrsa 4096 > key.pem && chmod 600 key.pem
+fi
+cd $current

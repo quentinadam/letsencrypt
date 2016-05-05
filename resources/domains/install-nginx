@@ -1,0 +1,11 @@
+#!/bin/bash
+current=$(pwd)
+cd "${BASH_SOURCE%/*}"
+domain=$(basename $(pwd))
+if [ ! -f "/etc/nginx/sites-available/$domain.conf" ]; then
+    cp domain.conf "/etc/nginx/sites-available/$domain.conf"
+fi
+if [ ! -f "/etc/nginx/sites-enabled/$domain.conf" ]; then
+    ln -s "/etc/nginx/sites-available/$domain.conf" "/etc/nginx/sites-enabled/$domain.conf" && systemctl reload nginx
+fi
+cd $current

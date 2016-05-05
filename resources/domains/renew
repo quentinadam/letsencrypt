@@ -1,0 +1,7 @@
+#!/bin/bash
+current=$(pwd)
+cd "${BASH_SOURCE%/*}"
+mkdir -p ../../challenges
+python ../../resources/acme_tiny.py --account-key ../../account/key.pem --csr ./csr.pem --acme-dir ../../challenges/ > ./cert.pem && cat cert.pem ../../resources/intermediate.pem > chain.pem
+service nginx reload
+cd $current

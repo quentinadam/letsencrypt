@@ -1,0 +1,10 @@
+#!/bin/bash
+current=$(pwd)
+cd "${BASH_SOURCE%/*}"
+if [ ! -f /etc/nginx/sites-available/letsencrypt.conf ]; then
+    sed -e "s|\[path\]|$(pwd)|g" resources/letsencrypt.conf > /etc/nginx/sites-available/letsencrypt.conf
+fi
+if [ ! -f /etc/nginx/sites-enabled/letsencrypt.conf ]; then
+    ln -s /etc/nginx/sites-available/letsencrypt.conf /etc/nginx/sites-enabled/letsencrypt.conf && systemctl reload nginx
+fi
+cd $current
