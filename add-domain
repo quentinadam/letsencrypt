@@ -17,7 +17,7 @@ if [ ! -z $1 ]; then
     if [ ! -f install-nginx ]; then
         cp ../../resources/domains/install-nginx .
     fi
-    if [ ! -f install-nginx ]; then
+    if [ ! -f install-cron ]; then
         cp ../../resources/domains/install-cron .
     fi
     if [ ! -f domain.conf ]; then
